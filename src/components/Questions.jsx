@@ -17,10 +17,10 @@ function Questions() {
               question: questionObject.question,
               shuffledAnswers: shuffle([
                 ...questionObject.incorrect_answers,
-                questionObject.correct_answer,
+                questionObject.correct_answer
               ]),
               correctAnswer: questionObject.correct_answer,
-              selectedAnswer: "",
+              selectedAnswer: ""
             };
           })
         );
@@ -37,18 +37,26 @@ function Questions() {
 
       [array[currentIndex], array[randomIndex]] = [
         array[randomIndex],
-        array[currentIndex],
+        array[currentIndex]
       ];
     }
 
     return array;
   }
 
+  const questionsElements = questionsAndAnswers.map((questionObject, index) => {
+    return (
+      <SingleQuestion
+        key={index}
+        question={questionObject.question}
+        allAnswers={questionObject.shuffledAnswers}
+      />
+    );
+  });
+
   return (
     <div>
-      <div className="questions-container">
-        <SingleQuestion />
-      </div>
+      <div className="questions-container">{questionsElements}</div>
     </div>
   );
 }
